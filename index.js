@@ -1,38 +1,24 @@
-//-------- Trying to do async operation in sync programming
-
-const getUser = id => {
-    
-    setTimeout(() => {
-      console.log("Reading a user from database...");
-      return({ id: id, giHubUsername: "galala" });
-    }, 2000);
-  
-};
-
-const getRepositories = username => {
-  
-    setTimeout(() => {
-      console.log("Calling GitHub API...");
-      return(["repo1", "repo2", "repo3"]);
-    }, 2000);
-  
-};
-
-const getCommits = repo => {
-  
-    setTimeout(() => {
-      console.log("Calling GitHub API...");
-      return(["commit"]);
-    }, 2000);
-  
-};
-
-
+//-------- Trying to do async operation using IIFE
 console.log("Before")
-const user = getUser(1); 
-console.log(user) // undefined
-const userRepo = getRepositories(user.giHubUsername);
-const userCommit = getCommit(userRepo); 
+const id = 1;
+(function(){  
+    setTimeout(() => {
+      console.log("Reading a user from database...",id);
+      const username = "galalaa";
+        (function ()  {
+            setTimeout(() => {         
+              console.log("Calling GitHub API...",username);
+              const repo = (["repo1", "repo2", "repo3"]);
+              (function(){
+                setTimeout(() => {
+                  console.log("GitHub Repositories...",repo);
+                  return(["commit"]);
+                }, 2000);        
+            })()
+            }, 2000);    
+        })()
+    }, 2000);
+})();
 console.log("After")
 
 
