@@ -25,7 +25,9 @@ console.log("After")
 /* 
 
 conclusion : 
-- user return undefined
-- Cannot read property 'giHubUsername' of undefined (error)
+- working
+- no callback, but still hell
+- can't work with 3rd party async operation
+- can't have return value in a variable
 
  */
