@@ -1,11 +1,7 @@
-//-------- Trying to do async operation using callback
+//-------- Trying to do async operation using Named Callback Function
 
 console.log("Before")
-getUser(1,data1 => {
-    getRepositories(data1, data2 =>{
-      getCommits(data2)
-    })
-}); 
+getUser(1,namedGetRepositories); 
 console.log("After")
 
 function getUser(id, cb) {  
@@ -30,12 +26,21 @@ function getCommits (repo){
   
 };
 
+// Named Functions
+
+function namedGetCommits(data2){
+  getCommits(data2)
+}
+
+function namedGetRepositories(data1){
+  getRepositories(data1,getCommits)
+}
 
 /* 
 
 conclusion : 
 - working
-- callbacks, but hell
+- callbacks, not hell
 - can work with 3rd party async operation
 - can't have return value in a variable
 
