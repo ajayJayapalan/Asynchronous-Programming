@@ -1,33 +1,42 @@
-//-------- Trying to do async operation using IIFE
+//-------- Trying to do async operation using callback
+
 console.log("Before")
-const id = 1;
-(function(){  
+getUser(1,data1 => {
+    getRepositories(data1, data2 =>{
+      getCommits(data2)
+    })
+}); 
+console.log("After")
+
+function getUser(id, cb) {  
     setTimeout(() => {
       console.log("Reading a user from database...",id);
-      const username = "galalaa";
-        (function ()  {
-            setTimeout(() => {         
-              console.log("Calling GitHub API...",username);
-              const repo = (["repo1", "repo2", "repo3"]);
-              (function(){
-                setTimeout(() => {
-                  console.log("GitHub Repositories...",repo);
-                  return(["commit"]);
-                }, 2000);        
-            })()
-            }, 2000);    
-        })()
+      cb({id: id, name: "Joe",})
+    }, 2000); 
+};
+
+function getRepositories(data, cb){
+    setTimeout(() => {
+      console.log("Calling GitHub API...",data);
+      cb({...data,repo :["repo1", "repo2", "repo3"]})
     }, 2000);
-})();
-console.log("After")
+};
+
+function getCommits (repo){
+    setTimeout(() => {
+      console.log("GitHub Repositories...",repo);
+      console.log({...repo,commit:["commit"]})
+    }, 2000);
+  
+};
 
 
 /* 
 
 conclusion : 
 - working
-- no callback, but still hell
-- can't work with 3rd party async operation
+- callbacks, but hell
+- can work with 3rd party async operation
 - can't have return value in a variable
 
  */
