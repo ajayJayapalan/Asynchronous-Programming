@@ -2,12 +2,6 @@
 
 console.log("Before")
 
-// getUser(1,data1 => {
-//     getRepositories(data1, data2 =>{
-//       getCommits(data2)
-//     })
-// }); 
-
 const getUserData = getUser(1);
 getUserData.then((data)=> getRepositories(data))
    .then((data)=> getCommits(data))
@@ -46,8 +40,8 @@ function getCommits (repo){
 
 conclusion : 
 - working
-- callbacks, but hell
+- promise
 - can work with 3rd party async operation
-- can't have return value in a variable
+- return Promise Object
 
  */
